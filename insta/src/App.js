@@ -1,16 +1,19 @@
+
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import dummyData from './dummy-data';
 import PostContainer from './components/PostContainer/PostContainer'
-
+import SearchBar from './components/SearchBar/SearchBar'
+{/*import logo from './logo.svg';*/}
+{/**/}
 
 class App extends React.Component {
   constructor(){
     super();
     this.state={
       postdata:dummyData,
-      inputText:''
+      inputText:'',
+
     }
   }
 
@@ -24,21 +27,29 @@ handleChanges = (typing) =>{
 }
 
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
-        {this.state.postdata.map(object=>(<PostContainer stats ={object} />))}
+        <SearchBar/>
 
-        <form onSubmit={this.addNewComment}>
-        <input
-        type="text"
 
-        value={this.state.inputText}
-        onChange={this.handleChanges}
-        />
-        </form>
-
+        {this.state.postdata.map(object=>
+          (<PostContainer
+            stats ={object}
+            it={this.state.inputText}
+            typingChangesHandler={this.handleChanges}
+            />))}
         </header>
+        {/*
+          <form onSubmit={this.addNewComment}>
+          <input
+          type="text"
+          value={this.state.inputText}
+          onChange={this.handleChanges}
+          />
+          </form>*/}
+
       </div>
     );
   }
